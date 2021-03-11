@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MSBuildBinLogSummary": {
+      "commandName": "Project",
+      "commandLineArgs": "--log-file d:\\repos\\MSBuildStructuredLogSummary\\msbuild.binlog"
+    }
+  }
+}
