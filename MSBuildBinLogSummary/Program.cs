@@ -52,9 +52,9 @@ namespace MSBuildBinLogSummarizer
                 Console.WriteLine("Task " + TaskName + "," + TaskFile + "," + SenderName);
             }
 
-            foreach (var ( ItemName,  ItemSpec, Metadata) in util.Items)
+            foreach (var ( ItemName,  ItemSpec, MetadataCount) in util.Items)
             {
-                Console.WriteLine("Item " + ItemName + "," + ItemSpec + "," + Metadata.Count());
+                Console.WriteLine("Item " + ItemName + "," + ItemSpec + "," + MetadataCount);
             }
 
             foreach (var (PropertyName, PropertyValue) in util.Properties)

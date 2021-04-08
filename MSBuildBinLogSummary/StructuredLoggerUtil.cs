@@ -29,8 +29,8 @@ namespace MSBuildBinLogSummarizer
         private readonly List<(string Targets, string ProjectFile, string Message)> projects =
             new List<(string Targets, string ProjectFile, string Message)>();
 
-        private readonly List<(string ItemName, string ItemSpec, Dictionary<string, string> Metadata)> items =
-            new List<(string ItemName, string ItemSpec, Dictionary<string, string> Metadata)>();
+        private readonly List<(string ItemName, string ItemSpec, int MetadataCount)> items =
+            new List<(string ItemName, string ItemSpec, int MetadataCount)>();
 
         private readonly List<(string PropertyName, string PropertyValue)> properties =
             new List<(string PropertyName, string PropertyValue)>();
@@ -75,7 +75,7 @@ namespace MSBuildBinLogSummarizer
 
         private void RecordProperties(IEnumerable properties)
         {
-            foreach (DictionaryEntry property in properties)
+            foreach (KeyValuePair<string,string> property in properties)
             {
                 if (!RemoveVersionSpecificNames(property.Key.ToString()) && !RemoveVersionSpecificValues(property.Value.ToString()))
                 {
@@ -90,10 +90,10 @@ namespace MSBuildBinLogSummarizer
             {
                 if (!RemoveVersionSpecificNames(item.Key.ToString()))
                 {
-                    Microsoft.Build.Logging.TaskItem taskItem = (Microsoft.Build.Logging.TaskItem)item.Value;
+                    Microsoft.Build.Framework.ITaskItem taskItem = (Microsoft.Build.Framework.ITaskItem)item.Value;
                     if (RemoveVersionSpecificValues(taskItem.ItemSpec))
                         continue;
-                    this.items.Add((item.Key.ToString(), RemovePath(taskItem.ItemSpec), taskItem.Metadata));
+                    this.items.Add((item.Key.ToString(), RemovePath(taskItem.ItemSpec), taskItem.CloneCustomMetadata().Count));
                 }
             }
         }
@@ -194,7 +194,7 @@ namespace MSBuildBinLogSummarizer
         /// <summary>
         /// Items
         /// </summary>
-        public IEnumerable<(string ItemName, string ItemSpec, Dictionary<string, string> Metadata)> Items => this.items.AsReadOnly();
+        public IEnumerable<(string ItemName, string ItemSpec, int MetadataCount)> Items => this.items.AsReadOnly();
 
         /// <summary>
         /// Properties
