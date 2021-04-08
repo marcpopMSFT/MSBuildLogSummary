@@ -1,0 +1,31 @@
+--- a/Summary.wpf.5.0.104.txt
++++ b/Summary.wpf.5.0.201.txt
+-Project _CompileTemporaryAssembly,wpf_wyphghvj_wpftmp.csproj,Project "wpf_wyphghvj_wpftmp.csproj" (_CompileTemporaryAssembly target(s)):
++Project _CompileTemporaryAssembly,wpf_kmthrydm_wpftmp.csproj,Project "wpf_kmthrydm_wpftmp.csproj" (_CompileTemporaryAssembly target(s)):
++Target _CheckForUnsupportedTargetPlatformIdentifier,Microsoft.NET.TargetFrameworkInference.targets,CollectPackageReferences
++Target _AddOutputPathToGlobalPropertiesToRemove,Microsoft.Common.CurrentVersion.targets,_GetProjectReferenceTargetFrameworkProperties
++Target GenerateNETCompatibleDefineConstants,Microsoft.NET.Sdk.BeforeCommon.targets,AddImplicitDefineConstants
++Target GeneratePlatformCompatibleDefineConstants,Microsoft.NET.Sdk.BeforeCommon.targets,AddImplicitDefineConstants
++Target GenerateNETCompatibleDefineConstants,Microsoft.NET.Sdk.BeforeCommon.targets,AddImplicitDefineConstants
++Target GeneratePlatformCompatibleDefineConstants,Microsoft.NET.Sdk.BeforeCommon.targets,AddImplicitDefineConstants
++Target AddDepsJsonAndRuntimeConfigToCopyItemsForReferencingProjects,Microsoft.NET.Sdk.targets,GetCopyToOutputDirectoryItems
++Item SourceRoot,packages,0
++Property ResolveAssemblyReferenceOutputUnresolvedAssemblyConflicts,true
++Property NETCoreSdkPortableRuntimeIdentifier,win-x64
+-Property GenerateMSBuildEditorConfigFile,true
++Property GenerateFullPaths,true
+-Property GenerateFullPaths,true
+-Property _OriginalConfiguration,Debug
++Property _OriginalConfiguration,Debug
++Property BaseOutputPathWasSpecified,true
++Property MSBuildWarningsAsMessages,1701;1702
++Property MSBuildWarningsAsErrors,;NU1605
+-Property ImportWindowsDesktopTargets,true
++      PublishItemsOutputGroup;
++      PublishItemsOutputGroup;
++Property ImportWindowsDesktopTargets,true
++Property TargetPlatformMoniker,Windows,Version=7.0
+-Property TargetPlatformMoniker,Windows,Version=7.0
+-Property NuspecOutputPath,Debug
++Property RestoreOutputPath,obj
++Property NuspecOutputPath,Debug
