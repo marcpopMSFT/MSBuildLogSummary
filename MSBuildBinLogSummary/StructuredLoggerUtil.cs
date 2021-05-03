@@ -75,6 +75,11 @@ namespace MSBuildBinLogSummarizer
 
         private void RecordProperties(IEnumerable properties)
         {
+            if (properties == null)
+            {
+                return;
+            }
+
             foreach (KeyValuePair<string,string> property in properties)
             {
                 if (!RemoveVersionSpecificNames(property.Key.ToString()) && !RemoveVersionSpecificValues(property.Value.ToString()))
@@ -86,6 +91,11 @@ namespace MSBuildBinLogSummarizer
 
         private void RecordItems(IEnumerable items)
         {
+            if (items == null)
+            {
+                return;
+            }
+
             foreach (DictionaryEntry item in items)
             {
                 if (!RemoveVersionSpecificNames(item.Key.ToString()))
