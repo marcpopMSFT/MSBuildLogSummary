@@ -1,7 +1,8 @@
-﻿using System;
+﻿extern alias StructuredLogger;
+using System;
 using System.IO;
 using System.Linq;
-using Microsoft.Build.Logging.StructuredLogger;
+using StructuredLogger.Microsoft.Build.Logging.StructuredLogger;
 
 namespace MSBuildBinLogSummarizer
 {

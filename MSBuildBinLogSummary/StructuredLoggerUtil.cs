@@ -1,9 +1,12 @@
-﻿
+﻿extern alias StructuredLogger;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Build.Framework;
-using Microsoft.Build.Logging.StructuredLogger;
+using StructuredLogger.Microsoft.Build.Logging.StructuredLogger;
+
+
 
 namespace MSBuildBinLogSummarizer
 {
@@ -39,6 +42,8 @@ namespace MSBuildBinLogSummarizer
                                                                                 "MSBuildToolsPath", "MSBuildStartupDirectory", "MSBuildProjectDirectory", "MSBuildProjectDirectoryNoRoot", 
                                                                                 "DOTNET_CLI_TELEMETRY_SESSIONID", "DefineConstants", "ImplicitFrameworkDefine",};
 
+        private static StructuredLogger.Microsoft.Build.Framework.ProjectEvaluationFinishedEventArgs projectEventArgs;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -60,7 +65,10 @@ namespace MSBuildBinLogSummarizer
 
         private void AnyEvent(object _, BuildEventArgs e)
         {
-
+            if (e.GetType().Name.Contains("ProjectEvaluationFinished"))
+            {
+                projectEventArgs = (StructuredLogger.Microsoft.Build.Framework.ProjectEvaluationFinishedEventArgs)e;
+            }
         }
 
         private void ProjectEvent(object _, ProjectStartedEventArgs e)
@@ -68,8 +76,18 @@ namespace MSBuildBinLogSummarizer
             this.projects.Add((e.TargetNames,RemovePath(e.ProjectFile), e.Message ));
             if (e.TargetNames == "" && e.Message.Contains("default"))
             {
-                RecordItems(e.Items);
-                RecordProperties(e.Properties);
+                if (e.Items != null)
+                {
+                    RecordItems(e.Items);
+                    RecordProperties(e.Properties);
+                }
+
+                if (e.BuildEventContext.EvaluationId == projectEventArgs.BuildEventContext.EvaluationId)
+                {
+                    RecordItems(projectEventArgs.Items);
+                    RecordProperties(projectEventArgs.Properties);
+                }
+
             }
         }
 
